@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veredito Tributário 3 Minutos™ — Faço a Conta</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #1E3A5F;
+      --navy-light: #2C4F7C;
+      --gold: #F59E0B;
+      --gold-light: #FCD34D;
+      --green: #059669;
+      --green-dark: #047857;
+      --red: #DC2626;
+      --bg: #F8FAFC;
+      --white: #FFFFFF;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-500: #64748B;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --text: #1F2937;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+    .container--wide { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      background: var(--navy);
+      color: var(--gold-light);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .topbar span { color: #fff; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6b 100%);
+      color: #fff;
+      padding: 64px 0 72px;
+      text-align: center;
+    }
+    .hero__pre {
+      display: inline-block;
+      background: rgba(245,158,11,0.18);
+      border: 1px solid rgba(245,158,11,0.4);
+      color: var(--gold-light);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero__headline {
+      font-size: clamp(26px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 780px;
+      margin: 0 auto 20px;
+      letter-spacing: -0.02em;
+    }
+    .hero__headline mark {
+      background: none;
+      color: var(--gold);
+    }
+    .hero__sub {
+      font-size: clamp(16px, 2.5vw, 19px);
+      color: #CBD5E1;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .hero__cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(5,150,105,0.45);
+      border: none;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(5,150,105,0.5); }
+    .btn-primary:active { transform: translateY(0); }
+    .hero__trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #94A3B8;
+    }
+    .hero__trust-item { display: flex; align-items: center; gap: 6px; }
+    .hero__trust-item svg { opacity: 0.7; }
+    .hero__social {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      font-size: 13px;
+      color: #94A3B8;
+    }
+    .hero__social strong { color: #CBD5E1; }
+
+    /* ─── SECTION GENERIC ─── */
+    section { padding: 72px 0; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 18px;
+      color: var(--gray-500);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* ─── PROBLEM ─── */
+    .problem { background: #fff; }
+    .problem__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .problem__card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--gray-100);
+    }
+    .problem__icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .problem__text { font-size: 15px; color: var(--gray-700); line-height: 1.5; }
+    .problem__text strong { color: var(--navy); }
+    .problem__close {
+      margin-top: 48px;
+      background: #FEF3C7;
+      border: 1.5px solid #FCD34D;
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #92400E;
+      text-align: center;
+    }
+
+    /* ─── CONTADOR OBJECTION ─── */
+    .contador { background: var(--navy); color: #fff; }
+    .contador__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .contador__inner { grid-template-columns: 1fr; } }
+    .contador__left .section-title { color: #fff; }
+    .contador__left .section-sub { color: #94A3B8; }
+    .contador__box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .contador__box h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .contador__row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 15px;
+      color: #CBD5E1;
+      line-height: 1.5;
+    }
+    .contador__row:last-child { border-bottom: none; }
+    .contador__row .badge {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .badge--red { background: rgba(220,38,38,0.2); color: #FCA5A5; }
+    .badge--green { background: rgba(5,150,105,0.2); color: #6EE7B7; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: var(--bg); }
+    .how__steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .how__step {
+      background: #fff;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .how__num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 22px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .how__step h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .how__step p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+    .how__time {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 15px;
+      color: var(--gray-500);
+    }
+    .how__time strong { color: var(--green); font-size: 18px; }
+
+    /* ─── OFFER STACK ─── */
+    .offer { background: #fff; }
+    .offer__anchor {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .offer__anchor-price {
+      font-size: 15px;
+      color: var(--gray-500);
+      text-decoration: line-through;
+    }
+    .offer__anchor-real {
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .offer__anchor-real sup { font-size: 22px; vertical-align: top; margin-top: 6px; }
+    .offer__anchor-real sub { font-size: 18px; font-weight: 500; }
+    .offer__anchor-label {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-top: 6px;
+    }
+    .offer__stack {
+      background: var(--navy);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .offer__stack-header {
+      background: var(--gold);
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .offer__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .offer__item:last-child { border-bottom: none; }
+    .offer__item-check {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(5,150,105,0.25);
+      border: 1.5px solid rgba(5,150,105,0.5);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .offer__item-check svg { width: 13px; height: 13px; }
+    .offer__item-body { flex: 1; }
+    .offer__item-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .offer__item-desc { font-size: 13px; color: #94A3B8; line-height: 1.5; }
+    .offer__item-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: #FCD34D;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+    .offer__item--bonus .offer__item-name::before {
+      content: 'BÔNUS';
+      font-size: 10px;
+      background: rgba(245,158,11,0.2);
+      color: var(--gold);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-right: 8px;
+      vertical-align: middle;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .offer__total {
+      padding: 24px 28px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .offer__total-label { font-size: 15px; color: #94A3B8; }
+    .offer__total-value { font-size: 28px; font-weight: 800; color: var(--gold); }
+    .offer__cta {
+      padding: 28px;
+      background: #fff;
+      text-align: center;
+      border-top: 1.5px solid var(--gray-200);
+      border-radius: 0 0 16px 16px;
+    }
+    .offer__cta-price {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    .offer__cta-price s { margin-right: 8px; }
+    .offer__cta-price strong { color: var(--navy); font-size: 15px; }
+    .offer__cta .btn-primary { margin: 12px 0 8px; font-size: 20px; padding: 20px 48px; width: 100%; max-width: 480px; }
+    .offer__cta-micro {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    /* ─── FOUNDER ─── */
+    .founder { background: var(--gray-100); }
+    .founder__inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 600px) { .founder__inner { grid-template-columns: 1fr; } }
+    .founder__avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: var(--navy-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+      flex-shrink: 0;
+      border: 4px solid var(--gold);
+    }
+    .founder__name { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .founder__title { font-size: 14px; color: var(--green); font-weight: 600; margin-bottom: 16px; }
+    .founder__bio { font-size: 16px; color: var(--gray-700); line-height: 1.7; margin-bottom: 20px; }
+    .founder__creds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .founder__cred {
+      background: #fff;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ─── SOCIAL PROOF ─── */
+    .proof { background: #fff; }
+    .proof__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .proof__card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      background: var(--gray-100);
+      position: relative;
+    }
+    .proof__quote {
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .proof__quote::before { content: '"'; font-size: 40px; color: var(--gold); line-height: 0; vertical-align: -18px; margin-right: 4px; font-style: normal; }
+    .proof__author { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .proof__author span { font-weight: 400; color: var(--gray-500); }
+    .proof__saving {
+      display: inline-block;
+      background: rgba(5,150,105,0.1);
+      color: var(--green-dark);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    /* ─── GUARANTEE ─── */
+    .guarantee { background: var(--navy); color: #fff; }
+    .guarantee__inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .guarantee__inner { grid-template-columns: 1fr; } }
+    .guarantee__seal {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      background: rgba(245,158,11,0.1);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .guarantee__seal-days { font-size: 40px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .guarantee__seal-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-light); }
+    .guarantee__title { font-size: clamp(22px, 3.5vw, 30px); font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+    .guarantee__text { font-size: 17px; color: #CBD5E1; line-height: 1.7; margin-bottom: 16px; }
+    .guarantee__text strong { color: #fff; }
+    .guarantee__note { font-size: 14px; color: #64748B; font-style: italic; }
+
+    /* ─── FAQ ─── */
+    .faq { background: var(--bg); }
+    .faq__list { margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+    .faq__item {
+      background: #fff;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .faq__q {
+      width: 100%; text-align: left; background: none; border: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      line-height: 1.4;
+    }
+    .faq__q .arrow {
+      width: 24px; height: 24px;
+      background: var(--gray-100);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+    .faq__item.open .faq__q .arrow { transform: rotate(180deg); }
+    .faq__a {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.7;
+      border-top: 1px solid var(--gray-200);
+      margin: 0 24px;
+      padding-top: 16px;
+    }
+    .faq__item.open .faq__a { display: block; }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: #fff;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: clamp(26px, 4.5vw, 40px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .final-cta h2 mark { background: none; color: var(--gold); }
+    .final-cta p { font-size: 18px; color: #94A3B8; max-width: 480px; margin: 0 auto 36px; }
+    .final-cta .btn-primary { font-size: 20px; padding: 20px 52px; }
+    .final-cta__price-compare {
+      margin-top: 24px;
+      font-size: 14px;
+      color: #64748B;
+    }
+    .final-cta__price-compare span { color: #94A3B8; }
+
+    /* ─── URGENCY BAR ─── */
+    .urgency {
+      background: #7C2D12;
+      color: #FED7AA;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .urgency strong { color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      color: #475569;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 13px;
+    }
+    footer a { color: #64748B; text-decoration: underline; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      section { padding: 56px 0; }
+      .offer__item { padding: 16px 20px; }
+      .offer__stack-header { padding: 14px 20px; flex-direction: column; gap: 4px; text-align: center; }
+      .offer__total { padding: 20px; }
+      .offer__cta { padding: 20px; }
+      .guarantee__seal { width: 100px; height: 100px; }
+      .guarantee__seal-days { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  ⏳ Preço de lançamento: <strong>R$47/ano</strong> — válido para os primeiros 500 acessos &nbsp;|&nbsp; <span>Já confirmados: 47 acessos</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <p class="hero__pre">Para pequenos empresários no Simples Nacional e MEIs</p>
+    <h1 class="hero__headline">
+      A maioria dos empresários no Simples paga até <mark>R$1.200/mês a mais</mark> do que precisaria.<br>
+      Descubra em 3 minutos se você é um deles — e o que a Reforma Tributária vai custar se você não agir agora.
+    </h1>
+    <p class="hero__sub">
+      Sem contador. Sem planilha. Sem jargão. Só o veredito do que fazer — em linguagem simples, no celular, em 3 minutos.
+    </p>
+    <div class="hero__cta-wrap">
+      <a href="#oferta" class="btn-primary">Quero meu Veredito Tributário por R$47</a>
+      <div class="hero__trust">
+        <span class="hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Acesso imediato
+        </span>
+        <span class="hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Funciona no celular
+        </span>
+        <span class="hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Sem instalar nada
+        </span>
+        <span class="hero__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Garantia 30 dias
+        </span>
+      </div>
+    </div>
+    <p class="hero__social">
+      Criado por <strong>Jonatha Oliveira</strong> — MBA em Tributação, mestrando em Tecnologia Fiscal, consultor credenciado SEBRAE
+    </p>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <p class="section-label">O Problema</p>
+    <h2 class="section-title">Você já se perguntou alguma vez…</h2>
+    <p class="section-sub">Se sim, você está entre os 3 em cada 4 empresários do Simples que nunca fizeram um único planejamento tributário.</p>
+    <div class="problem__grid">
+      <div class="problem__card">
+        <div class="problem__icon">💸</div>
+        <p class="problem__text"><strong>"Será que estou no regime tributário certo, ou poderia pagar menos?"</strong></p>
+      </div>
+      <div class="problem__card">
+        <div class="problem__icon">📋</div>
+        <p class="problem__text"><strong>"O que muda no meu negócio com a Reforma Tributária — e quando isso começa a me afetar?"</strong></p>
+      </div>
+      <div class="problem__card">
+        <div class="problem__icon">🤷</div>
+        <p class="problem__text"><strong>"Meu contador nunca me explicou se tenho alternativa. Ele simplesmente emite o DAS todo mês."</strong></p>
+      </div>
+      <div class="problem__card">
+        <div class="problem__icon">📱</div>
+        <p class="problem__text"><strong>"Tentei entender por conta própria — planilha, Receita Federal, Google — e não cheguei a lugar nenhum."</strong></p>
+      </div>
+      <div class="problem__card">
+        <div class="problem__icon">💰</div>
+        <p class="problem__text"><strong>"Não tenho dinheiro para pagar R$1.000/mês por consultoria contábil — mas também não quero errar."</strong></p>
+      </div>
+      <div class="problem__card">
+        <div class="problem__icon">⏰</div>
+        <p class="problem__text"><strong>"A Reforma Tributária tá aí — mas ninguém me disse o que fazer com o meu negócio específico."</strong></p>
+      </div>
+    </div>
+    <div class="problem__close">
+      O problema não é falta de informação. É que <strong>a informação certa, para o seu negócio específico, nunca foi acessível por menos de R$500.</strong><br>
+      Até agora.
+    </div>
+  </div>
+</section>
+
+<!-- CONTADOR OBJECTION -->
+<section class="contador">
+  <div class="container">
+    <div class="contador__inner">
+      <div class="contador__left">
+        <p class="section-label">A dúvida que todo mundo tem</p>
+        <h2 class="section-title" style="color:#fff">"Mas meu contador já cuida disso, não é?"</h2>
+        <p class="section-sub" style="color:#94A3B8; margin-bottom: 0;">
+          Talvez. Mas existe uma diferença enorme entre um contador que <em>emite suas guias</em> e um que faz <em>planejamento tributário</em> ativo para o seu negócio.
+        </p>
+      </div>
+      <div class="contador__right">
+        <div class="contador__box">
+          <h4>Verifique o que seu contador fez pelo seu negócio:</h4>
+          <div class="contador__row">
+            <span class="badge badge--red">Fez?</span>
+            <span>Te mostrou por escrito a comparação entre Simples Nacional, Lucro Presumido e Lucro Real no seu faturamento atual?</span>
+          </div>
+          <div class="contador__row">
+            <span class="badge badge--red">Fez?</span>
+            <span>Te explicou como a Reforma Tributária impacta especificamente o seu tipo de negócio e suas vendas B2B?</span>
+          </div>
+          <div class="contador__row">
+            <span class="badge badge--red">Fez?</span>
+            <span>Te alertou quando seu faturamento cruzou o limite ideal para considerar troca de regime?</span>
+          </div>
+          <div class="contador__row">
+            <span class="badge badge--red">Fez?</span>
+            <span>Te entregou um relatório com o valor exato que você poderia economizar por mês mudando de regime?</span>
+          </div>
+          <div class="contador__row" style="border:none; padding-bottom:0;">
+            <span class="badge badge--green">Use</span>
+            <span><strong style="color:#fff">Se seu contador já faz tudo isso: use o Veredito Tributário para confirmar que ele está certo.</strong> Se ele nunca te mostrou, você não tem planejamento — você tem um serviço de emissão de guia.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <p class="section-label">Como Funciona</p>
+    <h2 class="section-title">3 passos. 4 campos. 3 minutos.</h2>
+    <p class="section-sub">Você não precisa entender nada de imposto. O sistema faz o cálculo — você lê o resultado em linguagem simples.</p>
+    <div class="how__steps">
+      <div class="how__step">
+        <div class="how__num">1</div>
+        <h3>Informe seu negócio</h3>
+        <p>São só 4 campos: faturamento mensal, setor de atuação, regime atual e se você faz vendas para outras empresas (B2B). Dois minutos no máximo.</p>
+      </div>
+      <div class="how__step">
+        <div class="how__num">2</div>
+        <h3>O sistema analisa</h3>
+        <p>Nosso algoritmo compara os 3 regimes tributários, calcula o DAS, e analisa o impacto da Reforma Tributária no seu perfil específico. 30 segundos.</p>
+      </div>
+      <div class="how__step">
+        <div class="how__num">3</div>
+        <h3>Leia seu Veredito</h3>
+        <p>Resultado em linguagem de pessoa comum — sem CNAE, sem jargão. Só: "Você paga X. Poderia pagar Y. Economia mensal: Z." PDF gerado na hora. 30 segundos.</p>
+      </div>
+    </div>
+    <p class="how__time">Tempo total do início ao Veredito: <strong>menos de 3 minutos</strong></p>
+  </div>
+</section>
+
+<!-- OFFER STACK -->
+<section class="offer" id="oferta">
+  <div class="container">
+    <p class="section-label" style="text-align:center; display:block;">O que você recebe</p>
+    <h2 class="section-title" style="text-align:center;">Tudo que está incluído por R$47/ano</h2>
+
+    <div class="offer__stack" style="margin-top: 40px;">
+      <div class="offer__stack-header">
+        <span>Veredito Tributário 3 Minutos™</span>
+        <span>Valor Real</span>
+      </div>
+
+      <!-- CORE -->
+      <div class="offer__item">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Calculadora DAS Simples Nacional</p>
+          <p class="offer__item-desc">Cálculo atualizado do seu DAS com base no faturamento real e Tabela do Simples vigente 2024/2025.</p>
+        </div>
+        <p class="offer__item-badge">R$97</p>
+      </div>
+      <div class="offer__item">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Comparador dos 3 Regimes + Veredito Automático</p>
+          <p class="offer__item-desc">Simples Nacional vs. Lucro Presumido vs. Lucro Real — com o valor exato de quanto você pagaria em cada regime e o veredito de qual é o melhor para você hoje.</p>
+        </div>
+        <p class="offer__item-badge">R$297</p>
+      </div>
+
+      <!-- BONUSES -->
+      <div class="offer__item offer__item--bonus">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Radar da Reforma™</p>
+          <p class="offer__item-desc">Análise do impacto da Reforma Tributária no seu segmento e perfil de vendas — com cronograma de quando cada mudança começa a te afetar.</p>
+        </div>
+        <p class="offer__item-badge">R$197</p>
+      </div>
+      <div class="offer__item offer__item--bonus">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Tradutor Fiscal™</p>
+          <p class="offer__item-desc">Todos os resultados traduzidos em linguagem simples. Nada de alíquota, COFINS, ou CSLL — só o número que importa e o que fazer com ele.</p>
+        </div>
+        <p class="offer__item-badge">R$97</p>
+      </div>
+      <div class="offer__item offer__item--bonus">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Dossiê Tributário™</p>
+          <p class="offer__item-desc">PDF personalizado gerado automaticamente com seu nome e CNPJ — relatório completo do seu planejamento tributário para apresentar ao contador, ao banco, ou ao sócio.</p>
+        </div>
+        <p class="offer__item-badge">R$97</p>
+      </div>
+      <div class="offer__item offer__item--bonus">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Kit Formalização™</p>
+          <p class="offer__item-desc">Para quem ainda é informal: simulador MEI vs. Simples vs. continuar informal — com cálculo de quanto você paga de imposto em cada cenário e passo a passo para formalizar.</p>
+        </div>
+        <p class="offer__item-badge">R$97</p>
+      </div>
+      <div class="offer__item offer__item--bonus">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Sentinela Fiscal™</p>
+          <p class="offer__item-desc">Alertas automáticos por e-mail quando seu faturamento cruzar o limiar ideal para considerar troca de regime — para você não perder o momento certo.</p>
+        </div>
+        <p class="offer__item-badge">R$97</p>
+      </div>
+      <div class="offer__item offer__item--bonus">
+        <div class="offer__item-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="offer__item-body">
+          <p class="offer__item-name">Termômetro de Regime™</p>
+          <p class="offer__item-desc">Semáforo visual de risco tributário: verde (está bem), amarelo (atenção), vermelho (está pagando a mais). Uma olhada e você sabe onde está.</p>
+        </div>
+        <p class="offer__item-badge">R$47</p>
+      </div>
+
+      <div class="offer__total">
+        <span class="offer__total-label">Valor total empilhado</span>
+        <span class="offer__total-value">R$929</span>
+      </div>
+
+      <div class="offer__cta">
+        <p class="offer__cta-price">
+          <s>De R$197/ano</s>
+          <strong>Preço de lançamento (primeiros 500): R$47/ano</strong>
+        </p>
+        <a href="#" class="btn-primary">Quero meu Veredito por R$47 — Acesso Imediato</a>
+        <p class="offer__cta-micro">Pagamento seguro · Acesso imediato · Funciona no celular · Garantia 30 dias</p>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top: 20px; font-size: 14px; color: var(--gray-500);">
+      R$47 por 12 meses de acesso = <strong>R$3,92 por mês</strong>.<br>
+      Menos que uma pizza. Com potencial de economizar entre R$300 e R$1.200 todo mês em impostos.
+    </p>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="container">
+    <p class="section-label">Quem está por trás disso</p>
+    <div class="founder__inner">
+      <div class="founder__avatar">🧑‍💼</div>
+      <div>
+        <p class="founder__name">Jonatha Oliveira</p>
+        <p class="founder__title">Fundador da Faço a Conta · Especialista em Tecnologia Fiscal</p>
+        <p class="founder__bio">
+          Passei os últimos anos trabalhando com planejamento tributário para pequenas empresas e percebendo a mesma coisa sempre: o empresário paga o que o contador manda porque nunca teve acesso a uma ferramenta que fizesse a conta por ele. Construí o Veredito Tributário para resolver exatamente isso — dar para o pequeno empresário o diagnóstico que antes só existia em escritórios de contabilidade de R$2.000/mês.
+        </p>
+        <div class="founder__creds">
+          <span class="founder__cred">🎓 MBA em Tributação</span>
+          <span class="founder__cred">📚 Mestrando — Tese em Tecnologia Fiscal</span>
+          <span class="founder__cred">✅ Consultor Credenciado SEBRAE</span>
+          <span class="founder__cred">💻 Bacharel em Análise de Sistemas</span>
+          <span class="founder__cred">📊 Bacharelando em Ciências Contábeis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="container">
+    <p class="section-label">O que os primeiros usuários descobriram</p>
+    <h2 class="section-title">Resultados reais dos beta testers</h2>
+    <div class="proof__grid">
+      <div class="proof__card">
+        <span class="proof__saving">Economia descoberta: R$680/mês</span>
+        <p class="proof__quote">Sempre achei que meu contador cuidava disso. Em 3 minutos descobri que estou no regime errado e pago quase R$700 a mais todo mês. Não sabia nem que isso era possível.</p>
+        <p class="proof__author">Rafael M. <span>— Dono de loja, São Paulo/SP</span></p>
+      </div>
+      <div class="proof__card">
+        <span class="proof__saving">Clareza antes da Reforma</span>
+        <p class="proof__quote">Sou vendedora e não entendo nada de imposto. Preenchi o faturamento, li o resultado e entendi tudo. O Radar da Reforma me mostrou exatamente o que vai mudar nas minhas vendas para lojas.</p>
+        <p class="proof__author">Camila S. <span>— Representante comercial, Belo Horizonte/MG</span></p>
+      </div>
+      <div class="proof__card">
+        <span class="proof__saving">Formalização no momento certo</span>
+        <p class="proof__quote">Estava informal há 3 anos com medo de pagar muito imposto. O Kit Formalização me mostrou que como MEI ia pagar menos do que pago hoje na informalidade. Abri o MEI na semana seguinte.</p>
+        <p class="proof__author">Diego P. <span>— Prestador de serviços, Manaus/AM</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guarantee">
+  <div class="container">
+    <div class="guarantee__inner">
+      <div class="guarantee__seal">
+        <span class="guarantee__seal-days">30</span>
+        <span class="guarantee__seal-label">Dias de<br>Garantia Total</span>
+      </div>
+      <div>
+        <h2 class="guarantee__title">Garantia de Descoberta ou Devolução Total</h2>
+        <p class="guarantee__text">
+          Acesse o Veredito Tributário. Preencha as informações do seu negócio. Leia seu resultado completo.
+        </p>
+        <p class="guarantee__text">
+          <strong>Se você não descobrir pelo menos uma oportunidade real de economia tributária no seu negócio, devolvo 100% do seu investimento — sem perguntas, sem burocracia, em até 30 dias.</strong>
+        </p>
+        <p class="guarantee__text">
+          Basta mandar um e-mail. E você pode <strong>ficar com o acesso</strong> mesmo assim.
+        </p>
+        <p class="guarantee__note">
+          Não aumentamos as taxas de reembolso com essa garantia — aumentamos as conversões. Porque quem tem medo de perder dinheiro não precisa mais ter.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BAR -->
+<div class="urgency">
+  ⚠️ A Reforma Tributária está em implementação gradual até 2033. <strong>Quem diagnostica hoje tem tempo de se reorganizar. Quem espera descobre o aumento na nota fiscal.</strong>
+</div>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <p class="section-label">Dúvidas Frequentes</p>
+    <h2 class="section-title">As perguntas que você provavelmente está fazendo</h2>
+    <div class="faq__list">
+
+      <div class="faq__item open">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          "R$47 por algo que substitui uma consultoria de R$1.000/mês? Que é isso?"
+          <span class="arrow">▾</span>
+        </button>
+        <p class="faq__a">
+          Faz sentido você desconfiar. Uma consultoria contábil completa custa R$500 a R$2.000/mês porque você paga pelo tempo do contador, pelo escritório, pela equipe. O Veredito Tributário faz o diagnóstico tributário — a parte de análise e comparação de regimes — de forma automatizada. Não substitui um contador para gestão mensal; substitui a consulta de diagnóstico que ninguém oferecia por menos de R$500. O preço é R$47 porque é lançamento, para os 500 primeiros. Depois disso, sobe para R$197/ano.
+        </p>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          "Meu contador já cuida disso."
+          <span class="arrow">▾</span>
+        </button>
+        <p class="faq__a">
+          Ótimo — use o Dossiê Tributário para confirmar que ele está certo. Se seu contador já te entregou por escrito a comparação dos 3 regimes no seu faturamento atual, com o impacto da Reforma para o seu segmento, você não precisa do Veredito Tributário. Mas se você nunca viu esse documento, seu contador está te prestando um serviço de emissão de guia — não de planejamento tributário. São serviços diferentes.
+        </p>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          "Não entendo nada de imposto. Vou conseguir usar isso?"
+          <span class="arrow">▾</span>
+        </button>
+        <p class="faq__a">
+          Sim. O Veredito Tributário foi construído exatamente para quem não é contador. Você preenche 4 campos — faturamento mensal, setor, regime atual, se faz vendas B2B — e o Tradutor Fiscal™ converte todo o resultado em linguagem simples. O sistema não te diz "sua alíquota efetiva é 8,72% no Anexo III". Te diz: "Você paga R$1.240/mês no Simples. No Lucro Presumido, pagaria R$680. Economia mensal: R$560." Só isso.
+        </p>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          "A Reforma Tributária ainda não chegou. Posso esperar."
+          <span class="arrow">▾</span>
+        </button>
+        <p class="faq__a">
+          A implementação da Reforma é gradual de 2024 a 2033. Empresas B2B já estão sentindo os primeiros impactos no cálculo de créditos tributários. Quem faz o diagnóstico agora tem 2 a 3 anos para se reorganizar — mudar de regime, ajustar preços, renegociar contratos. Quem espera descobre o impacto quando o imposto já mudou e não tem mais tempo de reagir. O Radar da Reforma te mostra especificamente quando e como a mudança afeta o seu tipo de negócio.
+        </p>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          "Como funciona o acesso? Tem aplicativo?"
+          <span class="arrow">▾</span>
+        </button>
+        <p class="faq__a">
+          Sem aplicativo, sem instalação. Funciona direto no navegador — celular ou computador. Após o pagamento confirmado, você recebe o link de acesso imediatamente por e-mail. Acesso válido por 12 meses a partir da ativação.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Você vai continuar pagando sem saber se está pagando certo — ou descobre agora por <mark>R$47?</mark></h2>
+    <p>3 minutos. 4 campos. O veredito do que fazer antes da Reforma Tributária chegar no seu negócio.</p>
+    <a href="#oferta" class="btn-primary">Quero meu Veredito Tributário — R$47</a>
+    <p class="final-cta__price-compare">
+      <span>Valor total do stack: R$929 &nbsp;·&nbsp; Preço de lançamento: R$47/ano &nbsp;·&nbsp; Garantia total de 30 dias</span>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Faço a Conta — Tecnologia Fiscal para Pequenos Empresários</p>
+  <p style="margin-top: 8px;"><a href="#">Política de Privacidade</a> · <a href="#">Termos de Uso</a> · <a href="mailto:contato@facoaconta.com.br">contato@facoaconta.com.br</a></p>
+  <p style="margin-top: 12px; font-size: 12px; color: #334155; max-width: 600px; margin-left: auto; margin-right: auto;">
+    O Veredito Tributário é uma ferramenta de diagnóstico e informação tributária. Não substitui o serviço de um contador para obrigações acessórias mensais. Para decisões de mudança de regime, consulte sempre um profissional habilitado junto ao CRC.
+  </p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq__item');
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
