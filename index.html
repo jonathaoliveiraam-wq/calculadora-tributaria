@@ -8,7 +8,6 @@
 <style>
   :root {
     --purple:     #7B2FFF;
-    --purple-dim: #4A00B4;
     --accent:     #A855F7;
     --accent2:    #C084FC;
     --bg:         #080808;
@@ -22,6 +21,7 @@
     --green:      #22c55e;
     --red:        #ef4444;
     --yellow:     #f59e0b;
+    --blue:       #60a5fa;
     --cond: 'Barlow Condensed', sans-serif;
     --body: 'Barlow', sans-serif;
   }
@@ -39,27 +39,26 @@
     -webkit-text-size-adjust: 100%;
   }
 
-  /* subtle purple glow top */
   body::after {
     content: '';
     position: fixed;
     top: -200px; left: 50%;
     transform: translateX(-50%);
     width: 800px; height: 400px;
-    background: radial-gradient(ellipse, rgba(123,47,255,0.18) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(123,47,255,0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
 
   .container {
-    max-width: 960px;
+    max-width: 980px;
     margin: 0 auto;
     padding: 0 20px 60px;
     position: relative;
     z-index: 1;
   }
 
-  /* ── HEADER ── */
+  /* HEADER */
   header {
     text-align: center;
     padding: 48px 0 36px;
@@ -97,7 +96,7 @@
     color: var(--text-dim);
   }
 
-  /* ── TABS ── */
+  /* TABS */
   .tabs {
     display: flex;
     gap: 0;
@@ -111,11 +110,11 @@
 
   .tab {
     font-family: var(--cond);
-    font-size: clamp(13px, 2vw, 15px);
+    font-size: clamp(12px, 1.8vw, 14px);
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 14px 24px;
+    padding: 14px 20px;
     border: none;
     background: transparent;
     color: var(--text-dim);
@@ -130,7 +129,7 @@
   .tab.active { color: var(--white); border-bottom-color: var(--purple); }
   .tab:hover  { color: var(--accent2); }
 
-  /* ── SECTION LABEL ── */
+  /* SECTION LABEL */
   .section-label {
     font-family: var(--cond);
     font-size: clamp(10px, 1.6vw, 12px);
@@ -144,7 +143,6 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    opacity: 0.9;
   }
 
   .section-label::after {
@@ -154,7 +152,7 @@
     background: var(--border2);
   }
 
-  /* ── FORM ── */
+  /* FORM */
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -214,7 +212,7 @@
 
   .radio-item input { width: auto; accent-color: var(--purple); }
 
-  /* ── BUTTON ── */
+  /* BUTTON */
   .btn-calc {
     width: 100%;
     padding: 20px;
@@ -235,7 +233,7 @@
   .btn-calc:hover  { background: #8b3fff; box-shadow: 0 0 28px rgba(123,47,255,0.4); }
   .btn-calc:active { transform: scale(0.99); }
 
-  /* ── RESULTS ── */
+  /* RESULTS */
   #results { display: none; margin-top: 40px; }
   #results.visible { display: block; animation: fadeUp 0.35s ease; }
 
@@ -244,7 +242,7 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── KPI ── */
+  /* KPI */
   .kpi-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -287,7 +285,7 @@
   .kpi.danger    .kpi-value { color: var(--red); }
   .kpi-sub { font-size: clamp(11px, 1.6vw, 12px); color: var(--text-dim); margin-top: 6px; }
 
-  /* ── MEMÓRIA ── */
+  /* MEMÓRIA */
   .memoria {
     background: var(--bg2);
     border: 1px solid var(--border2);
@@ -326,7 +324,7 @@
     word-break: break-all;
   }
 
-  /* ── IMPOSTOS ── */
+  /* IMPOSTOS */
   .impostos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -344,7 +342,7 @@
 
   .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
 
-  /* ── TABELA ── */
+  /* TABELA */
   .tabela-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 20px; }
 
   .tabela { width: 100%; border-collapse: collapse; font-size: clamp(13px, 2vw, 15px); min-width: 380px; }
@@ -370,15 +368,18 @@
     white-space: nowrap;
   }
 
-  .tabela tr.ativa td {
-    color: var(--white);
-    background: rgba(123,47,255,0.12);
-    font-weight: 600;
-  }
-
+  .tabela tr.ativa td { color: var(--white); background: rgba(123,47,255,0.12); font-weight: 600; }
   .tabela tr.ativa td:first-child { border-left: 2px solid var(--purple); }
 
-  /* ── COMPARATIVO ── */
+  /* COMPARATIVO — 3 colunas */
+  .comp-grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* COMPARATIVO — 2 colunas (lucro real tab) */
   .comp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -389,20 +390,42 @@
   .regime-card {
     background: var(--bg2);
     border: 1px solid var(--border2);
-    padding: 22px;
+    padding: 20px;
     border-radius: 4px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .regime-card.winner { border-color: var(--purple); }
+  .regime-card.winner-sn   { border-color: var(--purple); }
+  .regime-card.winner-real { border-color: var(--red); }
+  .regime-card.winner-pres { border-color: var(--blue); }
+
+  .regime-badge {
+    font-family: var(--cond);
+    font-size: clamp(9px, 1.4vw, 10px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 10px;
+    align-self: flex-start;
+  }
+
+  .badge-sn   { background: rgba(123,47,255,0.2); color: var(--accent2); }
+  .badge-real { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-pres { background: rgba(96,165,250,0.15); color: var(--blue); }
+  .badge-melhor { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
 
   .regime-title {
     font-family: var(--cond);
-    font-size: clamp(10px, 1.6vw, 12px);
+    font-size: clamp(12px, 1.8vw, 14px);
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     color: var(--text-dim);
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border2);
   }
@@ -412,8 +435,8 @@
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-    font-size: clamp(13px, 2vw, 15px);
-    padding: 6px 0;
+    font-size: clamp(12px, 1.8vw, 14px);
+    padding: 5px 0;
     color: var(--text-dim);
     border-bottom: 1px solid rgba(255,255,255,0.03);
   }
@@ -422,7 +445,7 @@
   .regime-item .val { color: var(--text); white-space: nowrap; }
 
   .regime-total {
-    margin-top: 14px;
+    margin-top: 12px;
     padding-top: 12px;
     border-top: 1px solid var(--border2);
     display: flex;
@@ -430,27 +453,92 @@
     align-items: center;
     gap: 8px;
     font-family: var(--cond);
-    font-size: clamp(15px, 2.5vw, 18px);
+    font-size: clamp(14px, 2.2vw, 17px);
     font-weight: 700;
   }
 
-  .regime-total .val        { color: var(--accent2); white-space: nowrap; }
-  .regime-total .val.danger { color: var(--red); }
+  .regime-total .val-sn   { color: var(--accent2); white-space: nowrap; }
+  .regime-total .val-real { color: var(--red); white-space: nowrap; }
+  .regime-total .val-pres { color: var(--blue); white-space: nowrap; }
 
   .regime-carga {
     margin-top: 10px;
     font-family: var(--cond);
     font-size: clamp(11px, 1.6vw, 12px);
     padding: 4px 10px;
-    background: rgba(123,47,255,0.15);
-    color: var(--accent);
     display: inline-block;
     letter-spacing: 1px;
     border-radius: 3px;
-    border: 1px solid var(--border2);
+    border: 1px solid transparent;
   }
 
-  /* ── DIFF ── */
+  .carga-sn   { background: rgba(123,47,255,0.15); color: var(--accent); border-color: var(--border2); }
+  .carga-real { background: rgba(239,68,68,0.08);  color: var(--red);    border-color: rgba(239,68,68,0.2); }
+  .carga-pres { background: rgba(96,165,250,0.08); color: var(--blue);   border-color: rgba(96,165,250,0.2); }
+
+  /* RANKING */
+  .ranking-box {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    padding: 24px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+
+  .ranking-title {
+    font-family: var(--cond);
+    font-size: clamp(10px, 1.6vw, 12px);
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .ranking-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  .ranking-row:last-child { border-bottom: none; }
+
+  .ranking-pos {
+    font-family: var(--cond);
+    font-size: clamp(22px, 4vw, 28px);
+    font-weight: 900;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  .pos-1 { color: var(--green); }
+  .pos-2 { color: var(--yellow); }
+  .pos-3 { color: var(--red); }
+
+  .ranking-nome {
+    flex: 1;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .ranking-valor {
+    font-family: var(--cond);
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .ranking-economia {
+    font-size: clamp(11px, 1.6vw, 12px);
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* DIFF */
   .diff-box {
     background: var(--bg2);
     border: 1px solid var(--border2);
@@ -473,7 +561,7 @@
   .diff-value.negative { color: var(--red); }
   .diff-text { font-size: clamp(13px, 2vw, 15px); color: var(--text-dim); }
 
-  /* ── RISCO ── */
+  /* RISCO */
   .risco-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -510,7 +598,7 @@
 
   .risco-sub { font-size: clamp(12px, 1.6vw, 13px); color: var(--text-dim); line-height: 1.4; }
 
-  /* ── VEREDITO ── */
+  /* VEREDITO */
   .veredito {
     border: 1px solid var(--border);
     padding: 40px 28px;
@@ -531,7 +619,7 @@
 
   .veredito-title {
     font-family: var(--cond);
-    font-size: clamp(32px, 6vw, 52px);
+    font-size: clamp(30px, 6vw, 52px);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -543,12 +631,13 @@
   .veredito-title.positivo { color: var(--green); }
   .veredito-title.atencao  { color: var(--yellow); }
   .veredito-title.negativo { color: var(--red); }
+  .veredito-title.azul     { color: var(--blue); }
 
   .veredito-text {
     font-size: clamp(15px, 2.5vw, 17px);
     color: var(--text);
     line-height: 1.75;
-    max-width: 640px;
+    max-width: 660px;
     margin: 0 auto 20px;
   }
 
@@ -574,7 +663,25 @@
     border-top: 1px solid var(--border2);
   }
 
-  /* ── RESPONSIVO ── */
+  /* NOTE BOX */
+  .note-box {
+    background: rgba(96,165,250,0.06);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 4px;
+    padding: 16px 18px;
+    font-size: clamp(12px, 1.8vw, 14px);
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .note-box strong { color: var(--blue); }
+
+  /* RESPONSIVO */
+  @media (max-width: 800px) {
+    .comp-grid3 { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 720px) {
     .container { padding: 0 14px 48px; }
     header { padding: 32px 0 28px; }
@@ -587,12 +694,12 @@
     .mem-row { flex-direction: column; gap: 4px; }
     .mem-val { text-align: left; }
     .veredito { padding: 28px 16px; }
+    .ranking-row { flex-wrap: wrap; }
   }
 
   @media (max-width: 420px) {
-    .tab { padding: 11px 14px; font-size: 12px; }
+    .tab { padding: 11px 12px; font-size: 11px; }
     .btn-calc { font-size: 15px; letter-spacing: 2px; padding: 18px; }
-    .diff-box { padding: 24px 14px; }
   }
 </style>
 </head>
@@ -602,12 +709,12 @@
   <header>
     <span class="logo-text">⬡ Faço a Conta — Inteligência Fiscal</span>
     <h1>Calculadora <span>Tributária</span></h1>
-    <p class="subtitle">Cálculo do DAS · Comparativo Lucro Real · Risco B2B · Veredito Automático</p>
+    <p class="subtitle">Simples Nacional · Lucro Real · Lucro Presumido · Risco B2B · Veredito</p>
   </header>
 
   <div class="tabs">
     <button class="tab active" onclick="showTab('simples',this)">Simples Nacional</button>
-    <button class="tab" onclick="showTab('lucro',this)">× Lucro Real</button>
+    <button class="tab" onclick="showTab('comparativo',this)">Comparativo 3 Regimes</button>
     <button class="tab" onclick="showTab('b2b',this)">Risco B2B</button>
     <button class="tab" onclick="showTab('veredito',this)">Veredito</button>
   </div>
@@ -639,7 +746,7 @@
     <div class="field">
       <label>Margem de Lucro Estimada (%)</label>
       <input type="number" id="margem" placeholder="ex: 20" value="20" min="0" max="100" inputmode="decimal">
-      <span class="hint">Usada para comparar com o Lucro Real</span>
+      <span class="hint">Usada para comparar com Lucro Real e Presumido</span>
     </div>
 
     <div class="field">
@@ -703,39 +810,81 @@
       <div class="section-label">Incluído no DAS</div>
       <div class="impostos-grid" id="impostos-list"></div>
 
-      <div class="section-label">Tabela Completa</div>
+      <div class="section-label">Tabela Completa — Faixas do Anexo</div>
       <div class="tabela-wrap">
         <table class="tabela" id="tabela-faixas"></table>
       </div>
     </div>
 
-    <!-- LUCRO REAL -->
-    <div id="tab-lucro" style="display:none">
+    <!-- COMPARATIVO 3 REGIMES -->
+    <div id="tab-comparativo" style="display:none">
       <br>
-      <div class="section-label">Simulador de Migração — Simples vs Lucro Real</div>
-      <div class="comp-grid">
-        <div class="regime-card winner">
-          <div class="regime-title">🟣 Simples Nacional — Atual</div>
-          <div class="regime-item"><span>DAS (tributo único)</span><span class="val" id="lr-das">—</span></div>
-          <div class="regime-total"><span>Total Encargos</span><span class="val" id="lr-total-sn">—</span></div>
-          <div><span class="regime-carga" id="lr-carga-sn">—</span></div>
+      <div class="section-label">Comparativo — Simples vs Lucro Presumido vs Lucro Real</div>
+
+      <div class="note-box">
+        <strong>Lucro Presumido:</strong> regime intermediário onde a Receita Federal presume um percentual de lucro sobre o faturamento (8% comércio / 32% serviços) e aplica IRPJ + CSLL sobre esse valor presumido, além de PIS/COFINS cumulativos (0,65% + 3%).
+      </div>
+
+      <div class="comp-grid3">
+        <!-- SIMPLES -->
+        <div class="regime-card winner-sn" id="card-sn">
+          <span class="regime-badge badge-sn">Simples Nacional</span>
+          <div class="regime-title">Regime Atual</div>
+          <div class="regime-item"><span>DAS (tributo único)</span><span class="val" id="c-sn-das">—</span></div>
+          <div class="regime-item"><span>INSS Patronal</span><span class="val">Incluso no DAS</span></div>
+          <div style="flex:1"></div>
+          <div class="regime-total"><span>Total/mês</span><span class="val-sn" id="c-sn-total">—</span></div>
+          <span class="regime-carga carga-sn" id="c-sn-carga">—</span>
         </div>
-        <div class="regime-card">
-          <div class="regime-title">⚪ Lucro Real — Se Migrar</div>
-          <div class="regime-item"><span>PIS (1,65%)</span><span class="val" id="lr-pis">—</span></div>
-          <div class="regime-item"><span>COFINS (7,6%)</span><span class="val" id="lr-cofins">—</span></div>
-          <div class="regime-item"><span id="lr-icms-label">ICMS (~12%)</span><span class="val" id="lr-icms">—</span></div>
-          <div class="regime-item"><span>IRPJ (15% + adicional)</span><span class="val" id="lr-irpj">—</span></div>
-          <div class="regime-item"><span>CSLL (9%)</span><span class="val" id="lr-csll">—</span></div>
-          <div class="regime-item"><span>INSS Patronal (~28%)</span><span class="val" id="lr-inss">—</span></div>
-          <div class="regime-total"><span>Total Encargos</span><span class="val danger" id="lr-total-lr">—</span></div>
-          <div><span class="regime-carga" style="background:rgba(239,68,68,0.08);color:var(--red);border-color:rgba(239,68,68,0.2)" id="lr-carga-lr">—</span></div>
+
+        <!-- LUCRO PRESUMIDO -->
+        <div class="regime-card winner-pres" id="card-pres">
+          <span class="regime-badge badge-pres">Lucro Presumido</span>
+          <div class="regime-title">Opção Intermediária</div>
+          <div class="regime-item"><span>PIS (0,65%)</span><span class="val" id="c-pres-pis">—</span></div>
+          <div class="regime-item"><span>COFINS (3%)</span><span class="val" id="c-pres-cofins">—</span></div>
+          <div class="regime-item"><span id="c-pres-icms-lbl">ICMS (~12%)</span><span class="val" id="c-pres-icms">—</span></div>
+          <div class="regime-item"><span>IRPJ s/ lucro presumido</span><span class="val" id="c-pres-irpj">—</span></div>
+          <div class="regime-item"><span>CSLL s/ lucro presumido</span><span class="val" id="c-pres-csll">—</span></div>
+          <div class="regime-item"><span>INSS Patronal (~28%)</span><span class="val" id="c-pres-inss">—</span></div>
+          <div class="regime-total"><span>Total/mês</span><span class="val-pres" id="c-pres-total">—</span></div>
+          <span class="regime-carga carga-pres" id="c-pres-carga">—</span>
+        </div>
+
+        <!-- LUCRO REAL -->
+        <div class="regime-card winner-real" id="card-real">
+          <span class="regime-badge badge-real">Lucro Real</span>
+          <div class="regime-title">Tributação pelo lucro efetivo</div>
+          <div class="regime-item"><span>PIS (1,65%)</span><span class="val" id="c-real-pis">—</span></div>
+          <div class="regime-item"><span>COFINS (7,6%)</span><span class="val" id="c-real-cofins">—</span></div>
+          <div class="regime-item"><span id="c-real-icms-lbl">ICMS (~12%)</span><span class="val" id="c-real-icms">—</span></div>
+          <div class="regime-item"><span>IRPJ (15% + adicional)</span><span class="val" id="c-real-irpj">—</span></div>
+          <div class="regime-item"><span>CSLL (9%)</span><span class="val" id="c-real-csll">—</span></div>
+          <div class="regime-item"><span>INSS Patronal (~28%)</span><span class="val" id="c-real-inss">—</span></div>
+          <div class="regime-total"><span>Total/mês</span><span class="val-real" id="c-real-total">—</span></div>
+          <span class="regime-carga carga-real" id="c-real-carga">—</span>
         </div>
       </div>
-      <div class="diff-box">
-        <div class="kpi-label" style="margin-bottom:10px">Diferença Mensal Entre os Regimes</div>
-        <div class="diff-value" id="diff-value">—</div>
-        <div class="diff-text" id="diff-text">—</div>
+
+      <!-- RANKING -->
+      <div class="section-label">Ranking — Menor Carga Tributária</div>
+      <div class="ranking-box">
+        <div id="ranking-rows"></div>
+      </div>
+
+      <!-- DIFERENÇAS -->
+      <div class="section-label">Diferenças Mensais vs Simples Nacional</div>
+      <div class="comp-grid">
+        <div class="diff-box" style="margin-bottom:0">
+          <div class="kpi-label" style="margin-bottom:8px; color: var(--blue)">Simples vs Lucro Presumido</div>
+          <div class="diff-value" id="diff-sn-pres">—</div>
+          <div class="diff-text" id="diff-sn-pres-txt">—</div>
+        </div>
+        <div class="diff-box" style="margin-bottom:0">
+          <div class="kpi-label" style="margin-bottom:8px; color: var(--red)">Simples vs Lucro Real</div>
+          <div class="diff-value" id="diff-sn-real">—</div>
+          <div class="diff-text" id="diff-sn-real-txt">—</div>
+        </div>
       </div>
     </div>
 
@@ -760,7 +909,7 @@
       </div>
       <div class="memoria" style="font-size:clamp(14px,2vw,16px); line-height:1.8">
         <strong style="color:var(--yellow)">Como funciona:</strong> Um cliente no Lucro Real que compra <span id="b2b-pct-txt">—</span> das suas vendas perde o direito ao crédito tributário por comprar de uma empresa do Simples.<br><br>
-        Esse "custo invisível" pode fazer clientes maiores preferirem fornecedores no Lucro Real — mesmo que seu preço seja menor.<br><br>
+        Esse "custo invisível" pode fazer clientes maiores preferirem fornecedores no Lucro Real ou Presumido — mesmo que seu preço seja menor.<br><br>
         <span style="color:var(--red)">Após a Reforma Tributária, esse risco se intensifica:</span> o IVA Dual (IBS+CBS) de ~26,5% não será aproveitado pelo seu cliente se você permanecer no Simples.
       </div>
     </div>
@@ -770,24 +919,24 @@
       <br>
       <div class="section-label">Veredito Inteligente</div>
       <div class="veredito">
-        <div class="veredito-eyebrow">Parecer Automático</div>
+        <div class="veredito-eyebrow">Parecer Automático — 3 Regimes + Risco B2B</div>
         <div class="veredito-title" id="v-titulo">—</div>
         <p class="veredito-text" id="v-texto">—</p>
         <div class="veredito-aviso" id="v-aviso" style="display:none"></div>
       </div>
     </div>
 
-    <p class="disclaimer">⚠ Simulação educacional. Valores estimados. Não substitui consultoria contábil.</p>
+    <p class="disclaimer">⚠ Simulação educacional. Valores estimados. Lucro Presumido e Real são aproximações — consulte um contador para análise completa.</p>
   </div>
 
 </div>
 <script>
 const TABELAS = {
-  1:{nome:"Anexo I — Comércio",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ICMS"],faixas:[{limite:180000,aliq:.04,parcela:0},{limite:360000,aliq:.073,parcela:5940},{limite:720000,aliq:.095,parcela:13860},{limite:1800000,aliq:.107,parcela:22500},{limite:3600000,aliq:.143,parcela:87300},{limite:4800000,aliq:.19,parcela:378000}]},
-  2:{nome:"Anexo II — Indústria",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ICMS","IPI"],faixas:[{limite:180000,aliq:.045,parcela:0},{limite:360000,aliq:.078,parcela:5940},{limite:720000,aliq:.10,parcela:13860},{limite:1800000,aliq:.112,parcela:22500},{limite:3600000,aliq:.147,parcela:85500},{limite:4800000,aliq:.30,parcela:720000}]},
-  3:{nome:"Anexo III — Serviços",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ISS"],faixas:[{limite:180000,aliq:.06,parcela:0},{limite:360000,aliq:.112,parcela:9360},{limite:720000,aliq:.135,parcela:17640},{limite:1800000,aliq:.16,parcela:35640},{limite:3600000,aliq:.21,parcela:125640},{limite:4800000,aliq:.33,parcela:648000}]},
-  4:{nome:"Anexo IV — Serviços (sem CPP)",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","ISS"],faixas:[{limite:180000,aliq:.045,parcela:0},{limite:360000,aliq:.09,parcela:8100},{limite:720000,aliq:.102,parcela:12420},{limite:1800000,aliq:.14,parcela:39780},{limite:3600000,aliq:.22,parcela:183780},{limite:4800000,aliq:.33,parcela:828000}]},
-  5:{nome:"Anexo V — Serviços (Fator R)",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ISS"],faixas:[{limite:180000,aliq:.155,parcela:0},{limite:360000,aliq:.18,parcela:4500},{limite:720000,aliq:.195,parcela:9900},{limite:1800000,aliq:.205,parcela:17100},{limite:3600000,aliq:.23,parcela:62100},{limite:4800000,aliq:.305,parcela:540000}]}
+  1:{nome:"Anexo I — Comércio",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ICMS"],pctPresumido:0.08,isServico:false,faixas:[{limite:180000,aliq:.04,parcela:0},{limite:360000,aliq:.073,parcela:5940},{limite:720000,aliq:.095,parcela:13860},{limite:1800000,aliq:.107,parcela:22500},{limite:3600000,aliq:.143,parcela:87300},{limite:4800000,aliq:.19,parcela:378000}]},
+  2:{nome:"Anexo II — Indústria",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ICMS","IPI"],pctPresumido:0.08,isServico:false,faixas:[{limite:180000,aliq:.045,parcela:0},{limite:360000,aliq:.078,parcela:5940},{limite:720000,aliq:.10,parcela:13860},{limite:1800000,aliq:.112,parcela:22500},{limite:3600000,aliq:.147,parcela:85500},{limite:4800000,aliq:.30,parcela:720000}]},
+  3:{nome:"Anexo III — Serviços",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ISS"],pctPresumido:0.32,isServico:true,faixas:[{limite:180000,aliq:.06,parcela:0},{limite:360000,aliq:.112,parcela:9360},{limite:720000,aliq:.135,parcela:17640},{limite:1800000,aliq:.16,parcela:35640},{limite:3600000,aliq:.21,parcela:125640},{limite:4800000,aliq:.33,parcela:648000}]},
+  4:{nome:"Anexo IV — Serviços (sem CPP)",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","ISS"],pctPresumido:0.32,isServico:true,faixas:[{limite:180000,aliq:.045,parcela:0},{limite:360000,aliq:.09,parcela:8100},{limite:720000,aliq:.102,parcela:12420},{limite:1800000,aliq:.14,parcela:39780},{limite:3600000,aliq:.22,parcela:183780},{limite:4800000,aliq:.33,parcela:828000}]},
+  5:{nome:"Anexo V — Serviços (Fator R)",impostos:["IRPJ","CSLL","COFINS","PIS/Pasep","CPP (INSS Patronal)","ISS"],pctPresumido:0.32,isServico:true,faixas:[{limite:180000,aliq:.155,parcela:0},{limite:360000,aliq:.18,parcela:4500},{limite:720000,aliq:.195,parcela:9900},{limite:1800000,aliq:.205,parcela:17100},{limite:3600000,aliq:.23,parcela:62100},{limite:4800000,aliq:.305,parcela:540000}]}
 };
 
 const FL   = ["1ª","2ª","3ª","4ª","5ª","6ª"];
@@ -801,7 +950,7 @@ function showTab(tab, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   if (!resultado) return;
-  ['simples','lucro','b2b','veredito'].forEach(t => {
+  ['simples','comparativo','b2b','veredito'].forEach(t => {
     document.getElementById('tab-'+t).style.display = t === tab ? 'block' : 'none';
   });
 }
@@ -819,69 +968,83 @@ function fmt(v) {
 function fmtPct(v) { return (v * 100).toFixed(1) + '%'; }
 
 function calcular() {
-  const anexo  = parseInt(document.getElementById('anexo').value);
-  const fat    = parseFloat(document.getElementById('faturamento').value) || 0;
-  const folha  = parseFloat(document.getElementById('folha').value)       || 0;
+  const anexo = parseInt(document.getElementById('anexo').value);
+  const fat   = parseFloat(document.getElementById('faturamento').value) || 0;
+  const folha = parseFloat(document.getElementById('folha').value)       || 0;
 
-  // BUG FIX: lê margem corretamente, inclusive 0
   const margemRaw = document.getElementById('margem').value;
-  const margem = margemRaw === '' ? 0.20 : parseFloat(margemRaw) / 100;
+  const margem    = margemRaw === '' ? 0.20 : parseFloat(margemRaw) / 100;
 
   const b2bPctRaw = document.getElementById('b2bpct').value;
-  const b2bPct = b2bPctRaw === '' ? 0 : parseFloat(b2bPctRaw) / 100;
+  const b2bPct    = b2bPctRaw === '' ? 0 : parseFloat(b2bPctRaw) / 100;
 
   const rb_manual = document.getElementById('rb_manual').checked;
   const rbt12_val = parseFloat(document.getElementById('rbt12_input').value);
-  const rbt12 = rb_manual && rbt12_val ? rbt12_val : fat * 12;
+  const rbt12     = rb_manual && rbt12_val ? rbt12_val : fat * 12;
 
-  const tabela = TABELAS[anexo];
+  const tabela    = TABELAS[anexo];
+  const isServico = tabela.isServico;
+
+  // SIMPLES
   let faixaIdx = tabela.faixas.length - 1;
   for (let i = 0; i < tabela.faixas.length; i++) {
     if (rbt12 <= tabela.faixas[i].limite) { faixaIdx = i; break; }
   }
-
   const faixa       = tabela.faixas[faixaIdx];
   const aliqEfetiva = (rbt12 * faixa.aliq - faixa.parcela) / rbt12;
   const das         = fat * aliqEfetiva;
+  const totalSN     = das;
 
-  const isServico = anexo >= 3;
+  // LUCRO REAL
   const lucro     = fat * margem;
-  const pis       = fat * 0.0165;
-  const cofins    = fat * 0.076;
-  const icms      = isServico ? fat * 0.05 : fat * 0.12;
-  // IRPJ só incide sobre lucro positivo
-  const irpj      = lucro > 0 ? lucro * 0.15 + (lucro > 20000 ? (lucro - 20000) * 0.10 : 0) : 0;
-  const csll      = lucro > 0 ? lucro * 0.09 : 0;
-  const inss      = folha * 0.28;
-  const totalLR   = pis + cofins + icms + irpj + csll + inss;
-  const diff      = totalLR - das;
+  const pis_real  = fat * 0.0165;
+  const cof_real  = fat * 0.076;
+  const icms_real = isServico ? fat * 0.05 : fat * 0.12;
+  const irpj_real = lucro > 0 ? lucro * 0.15 + (lucro > 20000 ? (lucro - 20000) * 0.10 : 0) : 0;
+  const csll_real = lucro > 0 ? lucro * 0.09 : 0;
+  const inss_real = folha * 0.28;
+  const totalReal = pis_real + cof_real + icms_real + irpj_real + csll_real + inss_real;
 
+  // LUCRO PRESUMIDO
+  // PIS 0,65% + COFINS 3% (cumulativo), IRPJ e CSLL sobre lucro presumido
+  const pctPres     = tabela.pctPresumido; // 8% comércio/ind, 32% serviços
+  const lucro_pres  = fat * pctPres;       // base de cálculo presumida
+  const pis_pres    = fat * 0.0065;
+  const cof_pres    = fat * 0.03;
+  const icms_pres   = isServico ? fat * 0.05 : fat * 0.12;
+  const irpj_pres   = lucro_pres * 0.15 + (lucro_pres > 20000 ? (lucro_pres - 20000) * 0.10 : 0);
+  const csll_pres   = lucro_pres * 0.09;
+  const inss_pres   = folha * 0.28;
+  const totalPres   = pis_pres + cof_pres + icms_pres + irpj_pres + csll_pres + inss_pres;
+
+  // B2B
   const vendasB2B    = fat * b2bPct;
   const riscoAtual   = vendasB2B * 0.12;
   const riscoReforma = vendasB2B * 0.265;
 
   resultado = {
-    fat, rbt12, faixaIdx, faixa, aliqEfetiva, das, tabela,
-    pis, cofins, icms, irpj, csll, inss, totalLR, totalSN: das, diff,
-    riscoAtual, riscoReforma, b2bPct, margem, isServico
+    fat, rbt12, faixaIdx, faixa, aliqEfetiva, das, tabela, isServico,
+    totalSN,
+    pis_real, cof_real, icms_real, irpj_real, csll_real, inss_real, totalReal,
+    pis_pres, cof_pres, icms_pres, irpj_pres, csll_pres, inss_pres, totalPres, pctPres,
+    b2bPct, margem, riscoAtual, riscoReforma
   };
 
   renderResults(resultado);
 
   const r = document.getElementById('results');
   r.classList.add('visible');
-  ['simples','lucro','b2b','veredito'].forEach(t => {
+  ['simples','comparativo','b2b','veredito'].forEach(t => {
     document.getElementById('tab-'+t).style.display = t === currentTab ? 'block' : 'none';
   });
 }
 
 function renderResults(r) {
-  // KPIs
+  // ── SIMPLES ──
   document.getElementById('kpi-das').textContent      = fmt(r.das);
   document.getElementById('kpi-aliq').textContent     = fmtPct(r.aliqEfetiva);
   document.getElementById('kpi-encargos').textContent = fmt(r.das);
 
-  // Memória
   document.getElementById('m-rbt12').textContent    = fmt(r.rbt12);
   document.getElementById('m-faixa').textContent    = FL[r.faixaIdx] + ' — ' + FLim[r.faixaIdx];
   document.getElementById('m-nominalp').textContent = (r.faixa.aliq * 100).toFixed(1) + '%';
@@ -891,11 +1054,9 @@ function renderResults(r) {
   document.getElementById('m-efetiva').textContent  = fmtPct(r.aliqEfetiva);
   document.getElementById('m-das').textContent      = fmt(r.das);
 
-  // Impostos
   document.getElementById('impostos-list').innerHTML = r.tabela.impostos.map(i =>
     `<div class="imposto-item"><span class="dot"></span>${i}</div>`).join('');
 
-  // Tabela faixas
   document.getElementById('tabela-faixas').innerHTML =
     `<tr><th>Faixa</th><th>Receita 12 Meses</th><th>Alíq. Nominal</th><th>Parcela Deduzir</th></tr>` +
     r.tabela.faixas.map((f, i) =>
@@ -904,43 +1065,96 @@ function renderResults(r) {
         <td>${(f.aliq*100).toFixed(1)}%</td><td>${fmt(f.parcela)}</td>
       </tr>`).join('');
 
-  // Lucro Real — usa os valores calculados com a margem real do usuário
-  document.getElementById('lr-das').textContent        = fmt(r.das);
-  document.getElementById('lr-total-sn').textContent   = fmt(r.totalSN);
-  document.getElementById('lr-carga-sn').textContent   = 'Carga efetiva: ' + fmtPct(r.aliqEfetiva);
-  document.getElementById('lr-pis').textContent        = fmt(r.pis);
-  document.getElementById('lr-cofins').textContent     = fmt(r.cofins);
-  document.getElementById('lr-icms-label').textContent = r.isServico ? 'ISS (~5%)' : 'ICMS (~12%)';
-  document.getElementById('lr-icms').textContent       = fmt(r.icms);
-  document.getElementById('lr-irpj').textContent       = fmt(r.irpj);
-  document.getElementById('lr-csll').textContent       = fmt(r.csll);
-  document.getElementById('lr-inss').textContent       = fmt(r.inss);
-  document.getElementById('lr-total-lr').textContent   = fmt(r.totalLR);
-  document.getElementById('lr-carga-lr').textContent   = 'Carga efetiva: ' + fmtPct(r.totalLR / r.fat);
+  // ── COMPARATIVO 3 REGIMES ──
+  const icmsLabel = r.isServico ? 'ISS (~5%)' : 'ICMS (~12%)';
+  const presLabel = r.isServico ? 'Base presumida: 32% fat.' : 'Base presumida: 8% fat.';
 
-  const dvEl = document.getElementById('diff-value');
-  const dtEl = document.getElementById('diff-text');
-  const margemLabel = (r.margem * 100).toFixed(0) + '% de margem';
+  document.getElementById('c-sn-das').textContent    = fmt(r.das);
+  document.getElementById('c-sn-total').textContent  = fmt(r.totalSN);
+  document.getElementById('c-sn-carga').textContent  = 'Carga efetiva: ' + fmtPct(r.aliqEfetiva);
 
-  if (r.diff > 0) {
-    dvEl.textContent = '−' + fmt(r.diff);
-    dvEl.className   = 'diff-value positive';
-    dtEl.textContent = `O Simples custa ${fmt(r.diff)} a menos por mês que o Lucro Real · ${margemLabel}`;
+  document.getElementById('c-pres-pis').textContent    = fmt(r.pis_pres);
+  document.getElementById('c-pres-cofins').textContent = fmt(r.cof_pres);
+  document.getElementById('c-pres-icms-lbl').textContent = icmsLabel;
+  document.getElementById('c-pres-icms').textContent   = fmt(r.icms_pres);
+  document.getElementById('c-pres-irpj').textContent   = fmt(r.irpj_pres);
+  document.getElementById('c-pres-csll').textContent   = fmt(r.csll_pres);
+  document.getElementById('c-pres-inss').textContent   = fmt(r.inss_pres);
+  document.getElementById('c-pres-total').textContent  = fmt(r.totalPres);
+  document.getElementById('c-pres-carga').textContent  = 'Carga efetiva: ' + fmtPct(r.totalPres / r.fat) + ' · ' + presLabel;
+
+  document.getElementById('c-real-pis').textContent    = fmt(r.pis_real);
+  document.getElementById('c-real-cofins').textContent = fmt(r.cof_real);
+  document.getElementById('c-real-icms-lbl').textContent = icmsLabel;
+  document.getElementById('c-real-icms').textContent   = fmt(r.icms_real);
+  document.getElementById('c-real-irpj').textContent   = fmt(r.irpj_real);
+  document.getElementById('c-real-csll').textContent   = fmt(r.csll_real);
+  document.getElementById('c-real-inss').textContent   = fmt(r.inss_real);
+  document.getElementById('c-real-total').textContent  = fmt(r.totalReal);
+  document.getElementById('c-real-carga').textContent  = 'Carga efetiva: ' + fmtPct(r.totalReal / r.fat) + ' · margem ' + (r.margem*100).toFixed(0) + '%';
+
+  // Ranking
+  const regimes = [
+    { nome: 'Simples Nacional', total: r.totalSN,   cor: 'var(--accent2)' },
+    { nome: 'Lucro Presumido',  total: r.totalPres,  cor: 'var(--blue)' },
+    { nome: 'Lucro Real',       total: r.totalReal,  cor: 'var(--red)' },
+  ].sort((a, b) => a.total - b.total);
+
+  const posCls = ['pos-1','pos-2','pos-3'];
+  const posEmoji = ['🥇','🥈','🥉'];
+  document.getElementById('ranking-rows').innerHTML = regimes.map((reg, i) => {
+    const diff = i > 0 ? ` · economiza ${fmt(reg.total - regimes[0].total)}/mês a mais que o 1º` : ' · Melhor opção';
+    return `<div class="ranking-row">
+      <span class="ranking-pos ${posCls[i]}">${posEmoji[i]}</span>
+      <div style="flex:1">
+        <div class="ranking-nome">${reg.nome}</div>
+        <div class="ranking-economia">${diff}</div>
+      </div>
+      <span class="ranking-valor" style="color:${reg.cor}">${fmt(reg.total)}<span style="font-size:12px;color:var(--text-dim)">/mês</span></span>
+    </div>`;
+  }).join('');
+
+  // Diffs
+  const diffPres = r.totalPres - r.totalSN;
+  const diffReal = r.totalReal - r.totalSN;
+
+  const dpEl = document.getElementById('diff-sn-pres');
+  const dpTx = document.getElementById('diff-sn-pres-txt');
+  if (diffPres > 0) {
+    dpEl.textContent = '−' + fmt(diffPres); dpEl.className = 'diff-value positive';
+    dpTx.textContent = `Simples custa ${fmt(diffPres)} a menos/mês que o Presumido`;
   } else {
-    dvEl.textContent = '+' + fmt(Math.abs(r.diff));
-    dvEl.className   = 'diff-value negative';
-    dtEl.textContent = `O Lucro Real seria ${fmt(Math.abs(r.diff))} mais barato por mês · ${margemLabel}`;
+    dpEl.textContent = '+' + fmt(Math.abs(diffPres)); dpEl.className = 'diff-value negative';
+    dpTx.textContent = `Presumido seria ${fmt(Math.abs(diffPres))} mais barato/mês`;
   }
 
-  // B2B
+  const drEl = document.getElementById('diff-sn-real');
+  const drTx = document.getElementById('diff-sn-real-txt');
+  if (diffReal > 0) {
+    drEl.textContent = '−' + fmt(diffReal); drEl.className = 'diff-value positive';
+    drTx.textContent = `Simples custa ${fmt(diffReal)} a menos/mês que o Lucro Real`;
+  } else {
+    drEl.textContent = '+' + fmt(Math.abs(diffReal)); drEl.className = 'diff-value negative';
+    drTx.textContent = `Lucro Real seria ${fmt(Math.abs(diffReal))} mais barato/mês`;
+  }
+
+  // ── B2B ──
   document.getElementById('risco-atual').textContent   = fmt(r.riscoAtual);
   document.getElementById('risco-reforma').textContent = fmt(r.riscoReforma);
   document.getElementById('b2b-pct-txt').textContent   =
     (r.b2bPct * 100).toFixed(0) + '% das suas vendas (' + fmt(r.fat * r.b2bPct) + '/mês)';
 
-  // Veredito
-  const sn_melhor  = r.diff > 0;
-  const risco_alto = r.riscoReforma > r.das * 0.5;
+  // ── VEREDITO ──
+  const melhor = [
+    { nome: 'Simples Nacional', total: r.totalSN   },
+    { nome: 'Lucro Presumido',  total: r.totalPres  },
+    { nome: 'Lucro Real',       total: r.totalReal  },
+  ].sort((a, b) => a.total - b.total)[0];
+
+  const sn_melhor    = melhor.nome === 'Simples Nacional';
+  const pres_melhor  = melhor.nome === 'Lucro Presumido';
+  const risco_alto   = r.riscoReforma > r.das * 0.5;
+
   const vT = document.getElementById('v-titulo');
   const vX = document.getElementById('v-texto');
   const vA = document.getElementById('v-aviso');
@@ -948,18 +1162,24 @@ function renderResults(r) {
   if (sn_melhor && !risco_alto) {
     vT.textContent   = 'Ficar no Simples';
     vT.className     = 'veredito-title positivo';
-    vX.textContent   = `Com base nos dados informados, o Simples Nacional é o regime mais vantajoso para sua empresa. Você economiza ${fmt(r.diff)} por mês em comparação ao Lucro Real, com carga efetiva de ${fmtPct(r.aliqEfetiva)}.`;
+    vX.textContent   = `Com base nos dados informados, o Simples Nacional é o regime mais vantajoso. Carga efetiva de ${fmtPct(r.aliqEfetiva)}, economizando ${fmt(r.totalPres - r.totalSN)} em relação ao Lucro Presumido e ${fmt(r.totalReal - r.totalSN)} em relação ao Lucro Real por mês.`;
     vA.style.display = 'none';
   } else if (sn_melhor && risco_alto) {
     vT.textContent   = 'Simples — mas com atenção';
     vT.className     = 'veredito-title atencao';
-    vX.textContent   = `O Simples ainda é mais econômico (${fmt(r.diff)}/mês de economia), mas o risco B2B é significativo. Com ${(r.b2bPct*100).toFixed(0)}% de vendas B2B, seus clientes PJ perdem ${fmt(r.riscoReforma)}/mês em crédito tributário pós-reforma. Isso pode comprometer sua competitividade.`;
-    vA.textContent   = '⚠ Com alta exposição B2B, avalie migração para Lucro Presumido';
+    vX.textContent   = `O Simples é o mais econômico (${fmtPct(r.aliqEfetiva)} de carga), mas o risco B2B pós-reforma é de ${fmt(r.riscoReforma)}/mês. Com ${(r.b2bPct*100).toFixed(0)}% de vendas B2B, seus clientes PJ perdem crédito tributário por comprar de você. Avalie os impactos na competitividade.`;
+    vA.textContent   = '⚠ Alta exposição B2B — considere análise com contador sobre migração para Lucro Presumido';
+    vA.style.display = 'inline-block';
+  } else if (pres_melhor) {
+    vT.textContent   = 'Lucro Presumido';
+    vT.className     = 'veredito-title azul';
+    vX.textContent   = `Com base nos dados informados, o Lucro Presumido é o regime mais vantajoso (${fmtPct(r.totalPres/r.fat)} de carga efetiva), ${fmt(r.totalSN - r.totalPres)}/mês mais barato que o Simples e ${fmt(r.totalReal - r.totalPres)}/mês mais barato que o Lucro Real. Além disso, seus clientes PJ poderão aproveitar créditos de ICMS/ISS.`;
+    vA.textContent   = '⚠ Recomenda-se análise detalhada com contador antes de migrar de regime';
     vA.style.display = 'inline-block';
   } else {
     vT.textContent   = 'Avaliar Migração';
     vT.className     = 'veredito-title negativo';
-    vX.textContent   = `Com a margem de ${(r.margem*100).toFixed(0)}%, o Lucro Real pode ser mais vantajoso (${fmt(Math.abs(r.diff))}/mês de economia potencial). Além disso, o risco B2B pós-reforma é de ${fmt(r.riscoReforma)}/mês. Recomenda-se análise detalhada com contador.`;
+    vX.textContent   = `Com a margem de ${(r.margem*100).toFixed(0)}%, o Lucro Real pode ser mais vantajoso (${fmtPct(r.totalReal/r.fat)} de carga efetiva). Compare os três regimes na aba "Comparativo 3 Regimes" e consulte um contador para análise completa do seu perfil fiscal.`;
     vA.textContent   = '⚠ Esta análise é educacional e não substitui consultoria contábil';
     vA.style.display = 'inline-block';
   }
