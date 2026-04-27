@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compra Confirmada | Análise Tributária 3 Minutos™</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #1E3A5F;
+      --gold: #F59E0B;
+      --gold-light: #FCD34D;
+      --green: #059669;
+      --green-dark: #047857;
+      --bg: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-500: #64748B;
+      --gray-700: #374151;
+      --text: #1F2937;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    /* ─── HEADER ─── */
+    .header {
+      background: var(--navy);
+      padding: 20px 0;
+      text-align: center;
+    }
+    .header__brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── HERO CONFIRMAÇÃO ─── */
+    .confirm {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding: 64px 0 56px;
+      text-align: center;
+      color: #fff;
+    }
+    .confirm__check {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(5,150,105,0.2);
+      border: 3px solid #34D399;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 36px;
+    }
+    .confirm__title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .confirm__title span { color: #34D399; }
+    .confirm__sub {
+      font-size: 18px;
+      color: #94A3B8;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ─── STEPS ─── */
+    .steps { background: #fff; padding: 56px 0; }
+    .steps__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .steps__title {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+    .steps__list { display: flex; flex-direction: column; gap: 20px; }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--gray-100);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .step__num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 16px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step__body h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .step__body p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+    .step__body a {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .step__body a:hover { text-decoration: underline; }
+
+    /* ─── CTA ACESSO ─── */
+    .access {
+      background: var(--navy);
+      padding: 56px 0;
+      text-align: center;
+    }
+    .access__title {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .access__sub {
+      font-size: 16px;
+      color: #94A3B8;
+      margin-bottom: 32px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 18px 48px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 6px 24px rgba(5,150,105,0.4);
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+    .access__note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #475569;
+    }
+
+    /* ─── DEPOIMENTO ─── */
+    .depo { background: var(--bg); padding: 56px 0; }
+    .depo__box {
+      background: #fff;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 36px;
+      text-align: center;
+    }
+    .depo__emoji { font-size: 40px; margin-bottom: 16px; }
+    .depo__title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .depo__sub {
+      font-size: 15px;
+      color: var(--gray-500);
+      max-width: 480px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+
+    /* ─── FOUNDER ─── */
+    .founder { background: #fff; padding: 56px 0; border-top: 1px solid var(--gray-200); }
+    .founder__inner {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    @media (max-width: 560px) { .founder__inner { flex-direction: column; align-items: center; text-align: center; } }
+    .founder__photo {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .founder__name { font-size: 17px; font-weight: 700; color: var(--navy); }
+    .founder__title { font-size: 13px; color: var(--green); font-weight: 600; margin-bottom: 10px; }
+    .founder__msg { font-size: 15px; color: var(--gray-700); line-height: 1.7; }
+    .founder__msg strong { color: var(--navy); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      color: #475569;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <p class="header__brand">Faço a Conta</p>
+</div>
+
+<!-- CONFIRMAÇÃO -->
+<section class="confirm">
+  <div class="container">
+    <div class="confirm__check">✓</div>
+    <h1 class="confirm__title">Compra <span>confirmada!</span></h1>
+    <p class="confirm__sub">Sua Análise Tributária está liberada. Veja abaixo como acessar agora mesmo.</p>
+  </div>
+</section>
+
+<!-- PRÓXIMOS PASSOS -->
+<section class="steps">
+  <div class="container">
+    <p class="steps__label">O que acontece agora</p>
+    <h2 class="steps__title">3 passos para começar</h2>
+    <div class="steps__list">
+      <div class="step">
+        <div class="step__num">1</div>
+        <div class="step__body">
+          <h3>Verifique seu e-mail</h3>
+          <p>Você vai receber em instantes um e-mail com o link de acesso personalizado. Verifique também a caixa de spam se não encontrar na caixa de entrada.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num">2</div>
+        <div class="step__body">
+          <h3>Acesse a Análise Tributária</h3>
+          <p>Clique no botão abaixo ou no link do e-mail. Informe apenas 4 dados do seu negócio: faturamento mensal, setor, regime atual e se faz vendas B2B.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__num">3</div>
+        <div class="step__body">
+          <h3>Leia seu resultado em 3 minutos</h3>
+          <p>O sistema compara os 3 regimes tributários e entrega seu veredito em linguagem simples. Baixe o PDF e guarde para mostrar ao seu contador.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTÃO DE ACESSO -->
+<section class="access">
+  <div class="container">
+    <h2 class="access__title">Pronto para começar?</h2>
+    <p class="access__sub">Seu acesso está liberado. Clique abaixo e faça sua análise agora.</p>
+    <a href="https://calculadora-tributaria-two.vercel.app" class="btn-primary">Acessar minha Análise Tributária</a>
+    <p class="access__note">Acesso válido por 12 meses. Dúvidas? Escreva para contato@facoaconta.com.br</p>
+  </div>
+</section>
+
+<!-- PEDIDO DE DEPOIMENTO -->
+<section class="depo">
+  <div class="container">
+    <div class="depo__box">
+      <div class="depo__emoji">💬</div>
+      <h3 class="depo__title">Depois que usar, conta para mim</h3>
+      <p class="depo__sub">Se a análise te ajudou a descobrir uma oportunidade de economia, sua história pode ajudar outros empresários na mesma situação. Leva 2 minutos.</p>
+      <a href="mailto:contato@facoaconta.com.br?subject=Meu resultado com a Análise Tributária" class="btn-outline">Enviar meu depoimento</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENSAGEM DO FUNDADOR -->
+<section class="founder">
+  <div class="container">
+    <div class="founder__inner">
+      <img src="jonatha.jpg" alt="Jonatha Oliveira" class="founder__photo" />
+      <div>
+        <p class="founder__name">Jonatha Oliveira</p>
+        <p class="founder__title">CEO, Faço a Conta</p>
+        <p class="founder__msg">
+          Obrigado por confiar no nosso trabalho. Construí essa ferramenta porque vi de perto centenas de empresários pagando imposto demais sem saber. <strong>Agora você tem a informação que precisava.</strong> Use, descubra quanto pode economizar e, se tiver qualquer dúvida, me escreve diretamente.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Faço a Conta · contato@facoaconta.com.br</p>
+</footer>
+
+</body>
+</html>
