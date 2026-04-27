@@ -67,36 +67,48 @@
       padding: 64px 0 72px;
       text-align: center;
     }
-    .hero__byline {
-      display: flex;
-      flex-direction: column;
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 52px;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 32px;
+      text-align: left;
     }
-    .hero__byline-photo {
-      width: 140px; height: 140px;
-      border-radius: 50%;
+    @media (max-width: 700px) {
+      .hero__inner { grid-template-columns: 1fr; text-align: center; }
+      .hero__founder-photo { width: 180px; height: 220px; margin: 0 auto; }
+      .hero__content .hero__pre { margin-left: auto; margin-right: auto; }
+      .hero__content .hero__headline { margin-left: 0; margin-right: 0; }
+      .hero__content .hero__sub { margin-left: auto; margin-right: auto; }
+      .hero__content .hero__cta-wrap { align-items: center; }
+      .hero__content .hero__trust { justify-content: center; }
+    }
+    .hero__founder-photo {
+      width: 280px;
+      height: 340px;
+      border-radius: 20px;
       object-fit: cover;
       object-position: center top;
-      border: 3px solid rgba(245,158,11,0.8);
-      box-shadow: 0 0 0 6px rgba(245,158,11,0.15);
+      border: 3px solid rgba(245,158,11,0.7);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
       flex-shrink: 0;
     }
+    .hero__content { display: flex; flex-direction: column; gap: 0; }
     .hero__byline-text {
       display: flex;
       flex-direction: column;
-      text-align: center;
+      margin-bottom: 20px;
     }
     .hero__byline-name {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: #fff;
       line-height: 1.3;
     }
     .hero__byline-title {
       font-size: 14px;
-      color: #94A3B8;
+      color: var(--gold);
+      font-weight: 600;
     }
     .hero__pre {
       display: inline-block;
@@ -639,45 +651,52 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero__byline">
-      <img src="jonatha.jpg" alt="Jonatha Oliveira" class="hero__byline-photo" />
-      <div class="hero__byline-text">
-        <span class="hero__byline-name">Jonatha Oliveira</span>
-        <span class="hero__byline-title">CEO, Faço a Conta</span>
+    <div class="hero__inner">
+
+      <!-- FOTO ESQUERDA -->
+      <img src="jonatha.jpg" alt="Jonatha Oliveira" class="hero__founder-photo" />
+
+      <!-- CONTEÚDO DIREITA -->
+      <div class="hero__content">
+        <div class="hero__byline-text">
+          <span class="hero__byline-name">Jonatha Oliveira</span>
+          <span class="hero__byline-title">CEO, Faço a Conta</span>
+        </div>
+        <p class="hero__pre">Para pequenos empresários no Simples Nacional e MEIs</p>
+        <h1 class="hero__headline" style="margin-left:0; margin-right:0;">
+          A maioria dos empresários no Simples paga até <mark>R$1.200/mês a mais</mark> do que precisaria.<br>
+          Descubra em 3 minutos se você é um deles — e o que a Reforma Tributária vai custar se você não agir agora.
+        </h1>
+        <p class="hero__sub" style="margin-left:0; margin-right:0; margin-top:16px; margin-bottom:28px;">
+          Sem contador. Sem planilha. Sem jargão. Só a análise do que fazer — em linguagem simples, no celular, em 3 minutos.
+        </p>
+        <div class="hero__cta-wrap" style="align-items:flex-start;">
+          <a href="#oferta" class="btn-primary">Quero minha Análise Tributária por R$47</a>
+          <div class="hero__trust" style="justify-content:flex-start;">
+            <span class="hero__trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Acesso imediato
+            </span>
+            <span class="hero__trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Funciona no celular
+            </span>
+            <span class="hero__trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Sem instalar nada
+            </span>
+            <span class="hero__trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Garantia 30 dias
+            </span>
+          </div>
+        </div>
+        <p class="hero__social" style="text-align:left; border-top: 1px solid rgba(255,255,255,0.10); margin-top:24px; padding-top:20px;">
+          MBA em Tributação · Especialista em Reestruturação Empresarial · Consultor SEBRAE
+        </p>
       </div>
+
     </div>
-    <p class="hero__pre">Para pequenos empresários no Simples Nacional e MEIs</p>
-    <h1 class="hero__headline">
-      A maioria dos empresários no Simples paga até <mark>R$1.200/mês a mais</mark> do que precisaria.<br>
-      Descubra em 3 minutos se você é um deles — e o que a Reforma Tributária vai custar se você não agir agora.
-    </h1>
-    <p class="hero__sub">
-      Sem contador. Sem planilha. Sem jargão. Só a análise do que fazer — em linguagem simples, no celular, em 3 minutos.
-    </p>
-    <div class="hero__cta-wrap">
-      <a href="#oferta" class="btn-primary">Quero minha Análise Tributária por R$47</a>
-      <div class="hero__trust">
-        <span class="hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Acesso imediato
-        </span>
-        <span class="hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Funciona no celular
-        </span>
-        <span class="hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Sem instalar nada
-        </span>
-        <span class="hero__trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Garantia 30 dias
-        </span>
-      </div>
-    </div>
-    <p class="hero__social">
-      MBA em Tributação · Especialista em Reestruturação Empresarial · Consultor credenciado SEBRAE
-    </p>
   </div>
 </section>
 
